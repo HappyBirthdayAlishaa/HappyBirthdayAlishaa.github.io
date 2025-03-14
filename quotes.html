@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator 💖</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        barbiepink: "#DA1884",
+                        softpink: "#fff5f7"
+                    },
+                    fontFamily: {
+                        elegant: ["Playfair Display", "serif"]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Typewriter Effect */
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .typewriter::after {
+            content: "|";
+            display: inline-block;
+            margin-left: 2px;
+            animation: blink 0.7s infinite;
+        }
+    </style>
+</head>
+<body class="bg-softpink text-barbiepink flex flex-col justify-center items-center min-h-screen px-6 text-center">
+
+    <!-- Heading -->
+    <h1 class="text-4xl font-extrabold font-[cursive] mb-6">Wisdom By Imad 🧐
+    </h1>
+
+    <!-- Bigger Quote Display Box -->
+    <div class="w-full max-w-lg bg-white text-barbiepink p-8 rounded-lg shadow-lg border-4 border-barbiepink h-48 flex justify-center items-center">
+        <p id="quote" class="text-xl font-[Dancing Script, cursive] typewriter"></p>
+    </div>
+
+    <!-- Generate Button -->
+    <button onclick="generateQuote()" class="mt-6 px-6 py-3 bg-barbiepink text-white rounded-full text-lg font-bold shadow-lg hover:bg-pink-700 transition">
+        More Wisdom 🤤
+
+    </button>
+
+    <script>
+        const quotes = [
+            "If life gives you lemonade 🍸 make lemons 🍋 life would be like whaaaat???? 🤯",
+            "Don't be yourself. Be a pizza. Everyone loves Pizza",
+            "Don't be something you're not. Unless you can be a fabulous unicorn. Always be a fabulous unicorn.",
+            "Face your problems! Unless your problem is your face",
+            "The most Important thing in life is THIS WEBSITE",
+            "NEVER GIVE UP UNLESS YOU'VE TRIED AT LEAST 3 TIMES COS THEN IT'S JUST ImPOSSIBLE",
+            "RUNNING AWAY FROM YOUR PROBLEMS WON'T MAKE YOU SKINNY"
+           
+        ];
+
+        function generateQuote() {
+            const quoteElement = document.getElementById("quote");
+            quoteElement.innerHTML = ""; // Clear existing quote
+            let quote = quotes[Math.floor(Math.random() * quotes.length)];
+            let charIndex = 0;
+
+            function typeWriter() {
+                if (charIndex < quote.length) {
+                    quoteElement.innerHTML += quote.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            typeWriter();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday AL 💖</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        barbiepink: "#DA1884",
+                        softpink: "#fff5f7"
+                    },
+                    fontFamily: {
+                        elegant: ["Playfair Display", "serif"]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Google Font -->
+   
+
+    <style>
+        /* Scroll Snap Effect */
+        .snap-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        .snap-section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+        }
+      
+    </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+
+<body class="bg-softpink text-barbiepink text-center h-screen overflow-hidden">
+
+    <!-- Snap Scroll Wrapper -->
+    <div class="snap-container w-full h-screen overflow-y-scroll">
+
+        <!-- 🎀 Welcome Section -->
+        <section class="h-screen flex justify-center items-center px-6 snap-start relative">
+            <div class="relative bg-softpink bg-opacity-80 text-barbiepink p-8 rounded-lg shadow-lg text-center border-4 border-barbiepink">
+                <h1 class="text-4xl font-extrabold font-[cursive] animate-bounce">
+                    Happy Birthday, Alisha!
+                </h1>
+            </div>
+        </section>
+
+        <!-- 🎠 Image Carousel Section -->
+        <section class="h-screen flex justify-center items-center px-6 snap-start">
+            <div class="w-full max-w-md">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="img2.jpg" class="w-full rounded-lg shadow-lg border-4 border-barbiepink"></div>
+                        <div class="swiper-slide"><img src="img3.jpg" class="w-full rounded-lg shadow-lg border-4 border-barbiepink"></div>
+                        <div class="swiper-slide"><img src="img4.jpg" class="w-full rounded-lg shadow-lg border-4 border-barbiepink"></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ✨ Poems Section -->
+        <section class="h-screen flex flex-col justify-center items-center px-6 snap-start bg-softpink text-barbiepink">
+            <h2 class="text-4xl font-extrabold font-[cursive] mb-4">Poems for You 💖</h2>
+            <div class="w-full max-w-md overflow-y-auto h-64 p-4 bg-white rounded-lg shadow-lg border-4 border-barbiepink">
+                <p id="poem" class="text-lg font-[Dancing Script, cursive]"></p>
+            </div>
+        </section>
+
+       <!-- 🎂 Countdown & Age Counter Section -->
+    <section class="h-screen flex flex-col justify-center items-center px-6 snap-start">
+        <h2 class="text-4xl font-extrabold font-[cursive] mb-4">Countdown & Age Counter 🎂</h2>
+
+        <!-- Countdown Timer -->
+        <div class="bg-barbiepink text-white p-6 rounded-lg shadow-lg text-center border-4 border-softpink">
+            <h3 class="text-2xl font-bold mb-2">The next sparkle in your constellation of years in :-</h3>
+            <p id="countdown" class="text-4xl font-[Orbitron, sans-serif] digital"></p>
+        </div>
+
+        <!-- Age Counter -->
+        <div class="mt-6 bg-barbiepink text-white p-6 rounded-lg shadow-lg text-center border-4 border-softpink">
+            <h3 class="text-2xl font-bold mb-2">You have blessed this planet for :-</h3>
+            <p id="age-counter" class="text-4xl font-[Orbitron, sans-serif] digital"></p>
+        </div>
+    </section>
+
+        <!-- 🌟 Navigation Buttons Section -->
+        <section class="h-screen flex flex-col justify-center items-center px-6 snap-start">
+            <h2 class="text-3xl font-extrabold font-[cursive] mb-4">Explore More 💖</h2>
+            <div class="flex gap-6">
+                <a href="bubbles.html" class="bg-barbiepink text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg transition transform hover:scale-105">
+                    🎥 B'Day Wishes
+                </a>
+                <a href="quotes.html" class="bg-barbiepink text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg transition transform hover:scale-105">
+                    ✨ Get Some Wisdom
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Swiper Script -->
+    <script>
+        const swiper = new Swiper(".swiper", {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true
+            }
+        });
+
+        // Typewriter Effect for Poems
+        const poems = [
+            "When you arrived you ended the riot, After that everything was quiet......",
+            "Zindigi zakhm se bhari hai waqt ko marham banana seekhlo,\n harna hai ek din maut se kyun na zindigi jeena seekhlo",
+            "Zindigi zakhm se bhari hai waqt ko marham banana seekhlo,\n harna hai ek din maut se kyun na zindigi jeena seekhlo"
+        ];
+
+        let index = 0;
+        let charIndex = 0;
+        let currentPoem = poems[index];
+        const poemElement = document.getElementById("poem");
+
+        function typeWriter() {
+            if (charIndex < currentPoem.length) {
+                poemElement.innerHTML += currentPoem.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 50);
+            } else {
+                setTimeout(nextPoem, 3000); // Wait 3s before next poem
+            }
+        }
+
+        function nextPoem() {
+            poemElement.innerHTML = "";
+            index = (index + 1) % poems.length;
+            currentPoem = poems[index];
+            charIndex = 0;
+            typeWriter();
+        }
+
+        typeWriter();
+
+        // Age & Countdown Timer
+        const birthday = new Date("March 15, 2002 00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let birthday = new Date(`March 15, ${currentYear} 00:00:00`).getTime();
+
+            if (birthday < now.getTime()) {
+                birthday = new Date(`March 15, ${currentYear + 1} 00:00:00`).getTime();
+            }
+
+            const timeLeft = birthday - now.getTime();
+
+            if (timeLeft < 0) {
+                document.getElementById("countdown").innerText = "🎉 Happy Birthday! 🎉";
+                return;
+            }
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        function updateAge() {
+            const birthDate = new Date("March 15, 2002 00:00:00").getTime();
+            const now = new Date().getTime();
+            const ageInMilliseconds = now - birthDate;
+            const ageInSeconds = ageInMilliseconds / 1000;
+            const years = Math.floor(ageInSeconds / (365.25 * 24 * 60 * 60));
+            const remainingSeconds = ageInSeconds % (365.25 * 24 * 60 * 60);
+            const days = Math.floor(remainingSeconds / (24 * 60 * 60));
+            const hours = Math.floor((remainingSeconds % (24 * 60 * 60)) / (60 * 60));
+            const minutes = Math.floor((remainingSeconds % (60 * 60)) / 60);
+            const seconds = Math.floor(remainingSeconds % 60);
+
+            document.getElementById("age-counter").innerText = `${years}y ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        setInterval(updateCountdown, 1000);
+        setInterval(updateAge, 1000);
+        updateCountdown();
+        updateAge();
+    </script>
+</body>
+>
+
+</html>

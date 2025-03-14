@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Bubbles</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background: #fff5f7;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-image: url('bubblebg.jpg');
+            background-size: cover; /* Ensures the image covers the entire screen */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat;
+        }
+
+        .bubble {
+    width: 90px;
+    height: 90px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0);
+    cursor: pointer;
+    border: 4px solid #20B2AA; /* Adds a white border around each bubble */
+}
+
+        /* Fullscreen Video */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .video-modal video {
+            width: auto;
+            height: 100vh;
+            max-width: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 8 Bubbles with Background Images -->
+    <div class="bubble" style="background-image: url('rimg1.jpg');" data-video="video1.mp4"></div>
+    <div class="bubble" style="background-image: url('rimg2.jpg');" data-video="video2.mp4"></div>
+    <div class="bubble" style="background-image: url('rimg3.jpg');" data-video="video3.mp4"></div>
+    <div class="bubble" style="background-image: url('rimg4.jpg');" data-video="video4.mp4"></div>
+    <div class="bubble" style="background-image: url('rimg5.jpg');" data-video="video5.mp4"></div>
+    <div class="bubble" style="background-image: url('rimg6.jpg');" data-video="video6.mp4"></div>
+    <div class="bubble" style="background-image: url('rimg7.jpg');" data-video="video7.mp4"></div>  
+    <div class="bubble" style="background-image: url('rimg8.jpg');" data-video="video8.mp4"></div>
+
+    <!-- Fullscreen Video Modal -->
+    <div id="videoModal" class="video-modal">
+        <video id="videoPlayer" playsinline controls></video>
+    </div>
+
+    <script>
+        const bubbles = document.querySelectorAll(".bubble");
+        const videoModal = document.getElementById("videoModal");
+        const videoPlayer = document.getElementById("videoPlayer");
+
+        // Randomize initial positions and directions
+        bubbles.forEach(bubble => {
+            bubble.style.top = `${Math.random() * (window.innerHeight - 100)}px`;
+            bubble.style.left = `${Math.random() * (window.innerWidth - 100)}px`;
+            
+            let speedX = (Math.random() - 0.5) * 4;
+            let speedY = (Math.random() - 0.5) * 4;
+
+            function moveBubble() {
+                let rect = bubble.getBoundingClientRect();
+                let x = rect.left + speedX;
+                let y = rect.top + speedY;
+
+                // Bounce off walls
+                if (x <= 0 || x + rect.width >= window.innerWidth) {
+                    speedX *= -1;
+                }
+                if (y <= 0 || y + rect.height >= window.innerHeight) {
+                    speedY *= -1;
+                }
+
+                bubble.style.left = `${x}px`;
+                bubble.style.top = `${y}px`;
+
+                requestAnimationFrame(moveBubble);
+            }
+
+            moveBubble();
+        });
+
+        // Play video on click
+        bubbles.forEach(bubble => {
+            bubble.addEventListener("click", () => {
+                const videoSrc = bubble.getAttribute("data-video");
+                videoPlayer.src = videoSrc;
+                videoModal.style.display = "flex";
+                videoPlayer.play();
+            });
+        });
+
+        // Close video on clicking anywhere
+        videoModal.addEventListener("click", () => {
+            videoModal.style.display = "none";
+            videoPlayer.pause();
+            videoPlayer.src = "";
+        });
+    </script>
+
+</body>
+</html>
